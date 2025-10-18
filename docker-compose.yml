@@ -1,0 +1,20 @@
+version: '3'
+services:
+  web:
+    build: # Overriding Dockerfile selection by replacing '.' here with passing '' and '' arguments
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules # do not try to map a folder(reference) against node_modules directory
+      - .:/app # map '.' ouside of the container to '/app' inside of the container
+  tests:
+    build: # Overriding Dockerfile selection by replacing '.' here with passing '' and '' arguments
+      context: .
+      dockerfile: Dockerfile.dev
+    # ports are not needed for the test service
+    volumes:
+      - /app/node_modules # do not try to map a folder(reference) against node_modules directory
+      - .:/app # map '.' ouside of the container to '/app' inside of the container
+    command: ["npm","run","test"] # override the Dockerfile command
