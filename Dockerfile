@@ -1,5 +1,5 @@
 # Build Phase
-FROM node:16-alpine as builder
+FROM node:lts-alpine as builder
 
 WORKDIR '/app'
 
